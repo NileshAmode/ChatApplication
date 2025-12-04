@@ -1,0 +1,67 @@
+﻿@page
+@model ChatApplication.Pages.LoginModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login - Chat System</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="~/css/Login.css" />
+
+</head>
+
+<body>
+
+    <div class="login-bg">
+        <div class="login-card">
+
+            <!-- HOME BUTTON -->
+            <div class="home-btn-wrap">
+                <a href="/Index" class="home-btn">
+                    <i class="fa fa-home"></i> Home
+                </a>
+            </div>
+
+            <h2 class="title">Welcome Back</h2>
+            <p class="subtitle">Login to continue your chat</p>
+
+            <!-- LOGIN FORM -->
+            <form method="post">
+
+                <div class="input-group">
+                    <label>Email</label>
+                    <input @* asp-for="Input.Email" *@ type="email" placeholder="Enter your email" />
+                    <span @* asp-validation-for="Input.Email" *@ class="error"></span>
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+                    <input @* asp-for="Input.Password" *@ type="password" placeholder="Enter password" />
+                    <span @* asp-validation-for="Input.Password" *@ class="error"></span>
+                </div>
+
+                <button type="submit" class="login-btn">Login</button>
+
+                <p class="register-link">
+                    Don’t have an account?
+                    <a href="/RegistrationPage">Register</a>
+                </p>
+
+            </form>
+        </div>
+    </div>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js"></script>
+
+</body>
+</html>

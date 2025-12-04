@@ -1,0 +1,155 @@
+﻿ @page
+@model IndexModel
+@{
+    Layout = null;
+}
+
+@*
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X2PFSX3F9Z"></script>
+
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/lib/bootstrap-icons-1.10.5/font/bootstrap-icons.css" />
+<link rel="icon" type="image/png" href="images/Fevicon.jpg">
+
+
+<link rel="stylesheet" href="~/css/Index.css" asp-append-version="true" />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<meta name="google-site-verification" content="iEE62ZE4HGrrUm5SYD70KoWas7euu0XJpsFKAO1Y8og" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vesper+Libre:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<link href="~/plugins/toastr/toastr.min.css" rel="stylesheet" />
+<title>Tuz Maz Jamal Leva Samaj Trusted Matrimony</title>
+<meta name="keywords" content=" Levapatil Matrimony, Levapatil Brides, Matrimony websites, Levapatil Grooms, Leva Patil Community, Leva Patil Matrimony, Leva Patil Marriage Bureau, Leva Patil, Matrimonials, Marathi Leva Patil grooms, Marathi Leva Patil marriage, लेवा पाटील समाजातील स्थळे" />
+<meta name="description" content=" Find your perfect match on Tuz Maz Jamal Lewa Samaj Matrimony. We offer a secure platform with advanced search and privacy controls to help you find a genuine connection. Free Register Now!" />
+<style>
+    #toast-container.toast-top-right {
+        top: 100px !important; /* move further down from top */
+        right: 12px;
+        height: 300px !important;
+    }
+
+    #toast-container > .toast {
+        min-height: 100px;
+        padding: 20px 25px;
+        font-size: 16px;
+    }
+
+</style>
+
+
+
+
+<div class="container-fluid p-0">
+    <nav>
+        <div class="logo">
+            <a href="/Index">
+                <img src="./Images/new_tuz-maz-jamal-logo.png" alt="Tuz Maz Jamal Logo">
+            </a>
+            @* <img src="./Images/new_tuz-maz-jamal-logo.png" alt="Tuz Maz Jamal Logo"> *
+        </div>
+
+        <!-- Navbar Menu -->
+        <ul id="menu">
+            <li class="menu-items"><a href="#home">Home</a></li>
+            <li class="menu-items"><a href="#about">About</a></li>
+            <li class="menu-items"><a href="#WhyUs">Why Choose Us</a></li>
+            <li class="menu-items"><a href="#success-story">Success Story</a></li>
+            <li class="menu-items"><a href="#steps">How To Work</a></li>
+            <li class="menu-items"><a href="#our-products">Our Products</a></li>
+
+          <div class="btn-row">
+            <li class="nav-btn"><a href="/Login">Login</a></li>
+            <li class="nav-btn"><a href="/RegistrationPage">Sign up</a></li>
+
+           <!--Button Only for ShowPopup-->
+                <li class="nav-btn"><a href="#" >Login</a></li>
+                <li class="nav-btn"><a href="#" onclick="return funPopUp(event);">Sign up</a></li> *
+
+            </div>
+        </ul>
+
+<!-- Hamburger (only 3 bars) -->
+<div class="hamburger" onclick="toggleMenu()">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+
+<div class="close-icon" id="closeIcon" onclick="toggleMenu()">
+    <i class="fa fa-close"></i>
+</div>
+
+    </nav>
+</div>
+
+ *@
+
+<link rel="stylesheet" href="~/css/Index.css" asp-append-version="true" />
+
+<!-- ===================== HERO SECTION ===================== -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Welcome to Nilesh Chat System</h1>
+        <p>Fast, secure, and real-time chatting system for users & admin.</p>
+
+        <div class="hero-buttons">
+            <a href="/Login" class="btn-primary">Start Chat</a>
+            <a href="/RegistrationPage" class="btn-secondary">Create Account</a>
+        </div>
+    </div>
+</section>
+
+
+<!-- ===================== FEATURES SECTION ===================== -->
+<section class="features" id="features">
+    <h2 class="section-title">Chat System Highlights</h2>
+
+    <div class="features-container">
+
+        <div class="feature-card">
+            <i class="fa fa-comments feature-icon"></i>
+            <h3>Real-Time Messaging</h3>
+            <p>Instant send/receive messages with fast performance.</p>
+        </div>
+
+        <div class="feature-card">
+            <i class="fa fa-lock feature-icon"></i>
+            <h3>Secure Chats</h3>
+            <p>End-to-end privacy protection with encrypted chat data.</p>
+        </div>
+
+        <div class="feature-card">
+            <i class="fa fa-users feature-icon"></i>
+            <h3>User & Admin System</h3>
+            <p>Separate dashboards for customer and admin management.</p>
+        </div>
+
+        <div class="feature-card">
+            <i class="fa fa-bolt feature-icon"></i>
+            <h3>Fast & Lightweight</h3>
+            <p>Built using .NET Razor Pages + SQL Server for high speed.</p>
+        </div>
+    </div>
+</section>
+
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+    <p>© 2025 Nilesh Chat System. All Rights Reserved.</p>
+</footer>
