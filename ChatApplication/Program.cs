@@ -27,6 +27,8 @@ using AspNetCoreHero.ToastNotification;
 using AspNetCoreHero.ToastNotification.Extensions;
 using ChatApplication.Extension;
 using ChatApplication.Handler;
+using ChatApplication.Interface;
+using ChatApplication.Service;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.Logging;
 using NLog;
@@ -63,6 +65,11 @@ using System.ComponentModel.Design;
 //}
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddScoped<ICustomerInfo, CustomerInfoService>();
+
+
+
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSignalR();
 
@@ -191,18 +198,13 @@ app.Use(static async (context, next) =>
         return;
     }
 
-
-    //string strSQL = "insert into PageList(PageName) values ('" + PageName.Replace("'","''")  + "')";
-
-    //DBUtility.ExecuteSQL(strSQL);
-
     DBUtility.InsertPageList(PageName, fullUrl, UserID, ipAddress);
 
     string path = context.Request.Path;
 
 
 
-    if ((path != "/" && path != "/Login" && path != "/PersonalDetails" && path != "/RegistrationPage" && path != "/ForgotPassword" && path != "/OTPVerify" && path != "/CreateNewPass" && path != "/Error") && (path != "/api/Order/InsertOrderDetails") && (path != "/VadhuVarMelava") && (path != "/Terms&Conditions") && (path != "/Privacy&Policy") && (path != "/api/Order/InsertGatheringDetails") && (path != "/api/Resend/InsertOtp"))
+    if ((path != "/" && path != "/Login" && path != "/Registration"))
 
     {
         if (context.Session.GetString("LoginType") == null)
@@ -215,20 +217,8 @@ app.Use(static async (context, next) =>
 
     string[] adminPagesArray = new[]
     {
-        "lookupmst",
-        "admindashboard",
-        "locationlist",
-        "pagerole",
-        "admin/customerlist",
-        "customerimgsadmin",
-        "customerimagesall",
-         "admin/custsubscriptionlist",
-         "admin/GatheringList",
-          "admin/ConfigurationList",
-          "admin/AddList",
-          "admin/Member_Ship_Mst",
-          "admin/OfflineMember_Ship",
-          "admin/ChatHistoryList"
+        "lookupmst"
+     
 
     };
 
@@ -332,30 +322,7 @@ app.UseNToastNotify();
 app.UseNotyf();
 app.UseAuthentication();
 
-//app.Use(async (context, next) =>
-//{
-//    string path = context.Request.Path;
 
-//    if (path != null &&
-//     (path.EndsWith(".css") || path.EndsWith(".js") || path.EndsWith(".png") ||
-//      path.EndsWith(".jpg") || path.EndsWith(".jpeg") || path.EndsWith(".gif") ||
-//      path.EndsWith(".svg") || path.EndsWith(".woff") || path.EndsWith(".woff2") ||
-//      path.EndsWith(".ttf") || path.EndsWith(".ico")))
-//    {
-//        await next();
-//        return;
-//    }
-
-//    if ((path != "/" && path != "/Index" && path != "/RegistrationPage" && path != "/ForgotPassword" && path != "/OTPVerify" && path != "/CreateNewPass" && path != "/Error") && context.Session.GetString("CustomerID") == null)
-//    {
-//        context.Response.Redirect("/Index");
-//        return;
-//    }
-
-//    await next();
-//    return;
-
-//});
 
 app.UseEndpoints(endpoints =>
 {
@@ -363,21 +330,9 @@ app.UseEndpoints(endpoints =>
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 });
-//app.UseEndpoints(endpoints => { endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}"); });
+
 SettingsConfigHelper.Appsetingconfig(app.Services.GetRequiredService<IConfiguration>());
-//using (var scope = app.Services.CreateScope())
-//{
-//    var lookupService = scope.ServiceProvider.GetRequiredService<ILookUpMst>();
-//    var coutryStateCityService = scope.ServiceProvider.GetRequiredService<ICountryStateCityService>();
-//    await lookupService.GetAllLookupAsync();
-//    await coutryStateCityService.GetAllCSCAsync();
-//}
 
 
 app.MapControllers();
-//app.MapStaticAssets();
-//app.MapRazorPages()
-//   .WithStaticAssets();
-//app.MapHub<ChatHub>("/chatHub");
-
 app.Run();
