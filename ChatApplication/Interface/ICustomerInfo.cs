@@ -4,7 +4,7 @@ namespace ChatApplication.Interface
 {
     public interface ICustomerInfo
     {
-     Task<CustomerInfo> InsertCustomerInfo(CustomerInfo obj);
+     Task<int> InsertCustomerInfo(CustomerInfo obj);
 
 
     }

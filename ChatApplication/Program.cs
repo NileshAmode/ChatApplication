@@ -36,33 +36,33 @@ using NLog.Web;
 using NToastNotify;
 using System.ComponentModel.Design;
 
-//var logger = CreateNlogLogger();
-//Logger CreateNlogLogger()
+var logger = CreateNlogLogger();
+Logger CreateNlogLogger()
 
-//{
-//    //LogManager.Configuration = new NLogLoggingConfiguration(configuration.GetSection("Nlog"));
-//    var logger = LogManager.Setup()
-//        .LoadConfigurationFromAppSettings()
-//        .GetCurrentClassLogger();
-//    logger.Info("nlog initiation started");
-//    try
-//    {
+{
+    //LogManager.Configuration = new NLogLoggingConfiguration(configuration.GetSection("Nlog"));
+    var logger = LogManager.Setup()
+        .LoadConfigurationFromAppSettings()
+        .GetCurrentClassLogger();
+    logger.Info("nlog initiation started");
+    try
+    {
 
-//        logger.Debug("init main");
-//        logger.Debug("Environment:");
-//        //	logger.Debug(enviroment);
-//    }
-//    catch (Exception exception)
-//    {
-//        logger.Error(exception, "Stopped program of exception");
-//        throw;
-//    }
-//    finally
-//    {
-//        NLog.LogManager.Shutdown();
-//    }
-//    return logger;
-//}
+        logger.Debug("init main");
+        logger.Debug("Environment:");
+        //	logger.Debug(enviroment);
+    }
+    catch (Exception exception)
+    {
+        logger.Error(exception, "Stopped program of exception");
+        throw;
+    }
+    finally
+    {
+        NLog.LogManager.Shutdown();
+    }
+    return logger;
+}
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -134,7 +134,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseStaticFiles();
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseRouting();
 app.UseSession();
@@ -155,7 +155,7 @@ app.Use(static async (context, next) =>
         ipAddress = "127.0.0.1";
     }
 
-    DBUtility.InsertPageList(PageName, fullUrl, UserID, ipAddress);
+    //DBUtility.InsertPageList(PageName, fullUrl, UserID, ipAddress);
     string[] blockExtensionsList = new[] { ".txt", ".exe", ".xml", ".dat", ".bat" };
 
 
@@ -198,7 +198,7 @@ app.Use(static async (context, next) =>
         return;
     }
 
-    DBUtility.InsertPageList(PageName, fullUrl, UserID, ipAddress);
+    //DBUtility.InsertPageList(PageName, fullUrl, UserID, ipAddress);
 
     string path = context.Request.Path;
 
@@ -214,113 +214,22 @@ app.Use(static async (context, next) =>
         }
     }
 
-
-    string[] adminPagesArray = new[]
-    {
-        "lookupmst"
-     
-
-    };
-
-
-
     string strPageNameToCheck = PageName.ToLower().Trim();
 
     var IsSiteIsDown = SettingsConfigHelper.IsSiteIsDown().ToLower().Trim();
 
 
-    if (strPageNameToCheck == "login" && IsSiteIsDown == "true")
-    {
-        context.Response.Redirect("/index");
-        return;
-    }
-
-    if (strPageNameToCheck != "login")
-    {
-
-        foreach (string singlePage in adminPagesArray)
-        {
-            if (strPageNameToCheck.Contains(singlePage))
-            {
-                if (context.Session.GetString("LoginType") != "superadmin")
-                {
-                    context.Response.Redirect("/Login");
-                    return;
-                }
-            }
-        }
-
-
-
-        string[] customerPagesArray = new[]
-        {
-            "advancesearch",
-            "api/interested/insertinteresteddetails",
-            "api/search/customerapprovedimgs",
-            "api/search/customerimgs",
-            "api/search/searchdetails",
-            "api/v1/mymatches/getmydashboarddetails",
-            "biodata",
-            "changepassword",
-            "customerimageuploadgallary",
-            "dashboard",
-            "disableaccount",
-            "imageeditingtool",
-            "knowmore",
-            "membership",
-            "mymatches",
-            "myprofile",
-            "preference",
-            "regularsearch",
-            "youandme"
-        };
-
-
-        foreach (string singlePage in customerPagesArray)
-        {
-            if (strPageNameToCheck.Contains(singlePage)
-            && !strPageNameToCheck.Contains("admindashboard")
-            && !strPageNameToCheck.Contains("customerimgsadmin")
-            )
-            {
-                if (string.IsNullOrEmpty(context.Session.GetString("CustomerID")))
-                {
-                    context.Response.Redirect("/Login");
-                    return;
-                }
-
-                if (context.Session.GetString("IsCompleted") != "1")
-                {
-                    context.Response.Redirect("/Login");
-                    return;
-                }
-            }
-        }
-
-        // check registraction page
-        if (strPageNameToCheck == "PersonalDetails".ToLower().Trim())
-        {
-            if (context.Session.GetString("IsCompleted") == "1")
-            {
-                context.Response.Redirect("/Login");
-                return;
-            }
-        }
-    }
-
+   
 
     await next();
 
 });
-
+app.UseAuthentication();
 app.UseAuthorization();
-
-
-
 app.MapRazorPages();
 app.UseNToastNotify();
 app.UseNotyf();
-app.UseAuthentication();
+
 
 
 

@@ -47,27 +47,27 @@ namespace ChatApplication.Extension
                 string strPageName = CommonUtility.RemoveFirstChar(context.Request.Path);
 
 
-                InsertErrorInfo(ex, strPageName);
+              // InsertErrorInfo(ex, strPageName);
                 // developer mode --- show exception on browser page
                 // production mode --- redirect to other page i.e error
             }
         }
 
-        public void InsertErrorInfo(Exception Ex, string strPageName)
-        {
-            SqlCommand cmd = new SqlCommand();
-            int i;
+        //public void InsertErrorInfo(Exception Ex, string strPageName)
+        //{
+        //    SqlCommand cmd = new SqlCommand();
+        //    int i;
 
-            string ErrorMessage = Ex.Message;
-            string StackTrace = Ex.StackTrace.ToString();
+        //    string ErrorMessage = Ex.Message;
+        //    string StackTrace = Ex.StackTrace.ToString();
 
-            cmd.Parameters.Add("@PageName", SqlDbType.VarChar, 2000).Value = CommonUtility.GetString(strPageName);
-            cmd.Parameters.Add("@ErrorMessage", SqlDbType.VarChar, 8000).Value = CommonUtility.GetString(ErrorMessage);
-            cmd.Parameters.Add("@StackTrace", SqlDbType.VarChar, 8000).Value = CommonUtility.GetString(StackTrace);
+        //    cmd.Parameters.Add("@PageName", SqlDbType.VarChar, 2000).Value = CommonUtility.GetString(strPageName);
+        //    cmd.Parameters.Add("@ErrorMessage", SqlDbType.VarChar, 8000).Value = CommonUtility.GetString(ErrorMessage);
+        //    cmd.Parameters.Add("@StackTrace", SqlDbType.VarChar, 8000).Value = CommonUtility.GetString(StackTrace);
 
-            i = DBUtility.ExecuteSP("InsertErrorInfo", cmd);
+        //    i = DBUtility.ExecuteSP("InsertErrorInfo", cmd);
 
-        }
+        //}
 
         private async Task HandleException(HttpContext context, Exception ex)
         {
