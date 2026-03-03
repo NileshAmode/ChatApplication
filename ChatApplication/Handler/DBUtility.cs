@@ -45,16 +45,16 @@ namespace ChatApplication.Handler
             string connectionString = SettingsConfigHelper.settingvalue();
             return connectionString.Trim();
         }
-        public static void InsertPageList(string strProcName, string FullPath, string UserId, string IpAddress)
-        {
-            SqlCommand command = new SqlCommand();
-            command.Parameters.Add("@ProcName", SqlDbType.VarChar, 8000).Value = strProcName;
-            command.Parameters.Add("@FullPath", SqlDbType.VarChar, 8000).Value = FullPath;
-            command.Parameters.Add("@UserId", SqlDbType.VarChar, 8000).Value = UserId;
-            command.Parameters.Add("@IpAddress", SqlDbType.VarChar, 8000).Value = IpAddress;
+        //public static void InsertPageList(string strProcName, string FullPath, string UserId, string IpAddress)
+        //{
+        //    SqlCommand command = new SqlCommand();
+        //    command.Parameters.Add("@ProcName", SqlDbType.VarChar, 8000).Value = strProcName;
+        //    command.Parameters.Add("@FullPath", SqlDbType.VarChar, 8000).Value = FullPath;
+        //    command.Parameters.Add("@UserId", SqlDbType.VarChar, 8000).Value = UserId;
+        //    command.Parameters.Add("@IpAddress", SqlDbType.VarChar, 8000).Value = IpAddress;
 
-            ExecuteSP("InsertPageList", command);
-        }
+        //    ExecuteSP("InsertPageList", command);
+        //}
 
 
         #endregion
@@ -757,21 +757,21 @@ namespace ChatApplication.Handler
             }
             return dv;
         }
-        public static void InsertErrorInfo(Exception Ex, string strPageName)
-        {
-            SqlCommand cmd = new SqlCommand();
-            int i;
+        //public static void InsertErrorInfo(Exception Ex, string strPageName)
+        //{
+        //    SqlCommand cmd = new SqlCommand();
+        //    int i;
 
-            string ErrorMessage = Ex.Message;
-            string StackTrace = Ex.StackTrace.ToString();
+        //    string ErrorMessage = Ex.Message;
+        //    string StackTrace = Ex.StackTrace.ToString();
 
-            cmd.Parameters.Add("@PageName", SqlDbType.VarChar, 2000).Value = CommonUtility.GetString(strPageName);
-            cmd.Parameters.Add("@ErrorMessage", SqlDbType.VarChar, 8000).Value = CommonUtility.GetString(ErrorMessage);
-            cmd.Parameters.Add("@StackTrace", SqlDbType.VarChar, 8000).Value = CommonUtility.GetString(StackTrace);
+        //    cmd.Parameters.Add("@PageName", SqlDbType.VarChar, 2000).Value = CommonUtility.GetString(strPageName);
+        //    cmd.Parameters.Add("@ErrorMessage", SqlDbType.VarChar, 8000).Value = CommonUtility.GetString(ErrorMessage);
+        //    cmd.Parameters.Add("@StackTrace", SqlDbType.VarChar, 8000).Value = CommonUtility.GetString(StackTrace);
 
-            i = DBUtility.ExecuteSP("InsertErrorInfo", cmd);
+        //    i = DBUtility.ExecuteSP("InsertErrorInfo", cmd);
 
-        }
+        //}
 
 
         public static DataSet GetDataSet(string procedureName, SqlCommand command)
@@ -795,7 +795,7 @@ namespace ChatApplication.Handler
             }
             catch (Exception ex)
             {
-                InsertErrorInfo(ex, procedureName);
+               // InsertErrorInfo(ex, procedureName);
                 throw ex;
             }
             finally
